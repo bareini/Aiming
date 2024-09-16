@@ -69,9 +69,9 @@ def evaluate_model(model, X_train, y_train, X_test, y_test,
             "rmse_normal_range": np.sqrt(mean_squared_error(y_true[normal_range], y_pred[normal_range]))
         }
 
-        u_range = metrics_u.URangeLoss(L=10, x0_high=y_train.mean(), k_high=0.08,
+        u_range = metrics_u.URangeCost(L=10, x0_high=y_train.mean(), k_high=0.08,
                                         b_high=0, x0_low=y_train.mean(), k_low=0.1, b_low=0)
-        u_trend = metrics_u.TrendLoss()
+        u_trend = metrics_u.TrendCost()
 
         results[name]["u_range"], results[name]["u_raw"] = u_range.range_u_loss(y_true, y_pred, raw=True)
         results[name]["u_trend"], results[name]["u_trend_raw"] = u_trend.trend_loss(y_true, y_pred, raw=True, ids=ids)
