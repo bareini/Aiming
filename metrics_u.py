@@ -176,7 +176,7 @@ class TrendCost:
             return None
 
         chunks_y = generate_sliding_window(y_true, k=k-3)
-        chunks_pred = generate_sliding_window(y_pred[k-3:], k=k)
+        chunks_pred = generate_sliding_window(y_pred[k-3:], k=3)
         unified = [np.append(chunks_y[i], chunks_pred[i]) for i in range(len(chunks_pred))]
 
         return np.array([slope_fit(np.arange(len(chunk)), chunk) for chunk in unified])
