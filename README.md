@@ -20,16 +20,17 @@ $U_r(y_t, \hat{y}_t) = \left| \left( \max\left(\frac{L}{1 + e^{k_h \cdot (y_t - 
 $h, l, k_{h},k_{l} L$ are parameters controlling the high and low thresholds and sigmoid steepness for clinical importance. The utility cost rises when the prediction falls outside the clinically normal range.
 
 ### Trend Utility Cost:
-For trends, we calculate the difference between the predicted and actual slopes. The trend utility cost 
-𝑈
-𝑡
-𝑟
-U 
-tr
-​
-  is designed to penalize sharper deviations, especially in critical cases like a drop in blood pressure. It is computed as:
+For trends, we calculate the difference between the predicted and actual slopes. The trend utility cost $U_{t}$ is designed to penalize sharper deviations, especially in critical cases like a drop in blood pressure. It is computed as:
+$U_{tr}(Y_{t-n:t+m}, \hat{Y}_{t-n:t+m}) = \max(\hat{Y}_{t-n:t+m} - Y_{t-n:t+m}, 0)^2 \cdot w_l + \max(Y_{t-n:t+m} - \hat{Y}_{t-n:t+m}, 0)^2 \cdot w_h$
 
+### Trend Deviation Utility Cost:
+The trend deviation cost $U_{td}$ measures how surprising the difference between the expected and actual trends is. This is computed by comparing the trend prediction error to the deviation from an expected trend:
 
+$U_{td}(Y_{t-n:t+m}, \hat{Y}_{t-n:t+m}, y_t, \hat{y}_t) = \left( Y'_{t-n:t} - Y_{t-n:t+m} \right)^2 \cdot |y_t - \hat{y}_t|$
+
+Here, $Y'_{t-n:t}$ represents the expected trend over the previous $n$ steps, and $Y_{t-n:t+m}$ is the actual trend. This utility cost emphasizes how unexpected a trend is based on prior information.
+
+Each of these utility costs provides a different angle on how clinically useful a prediction is, allowing models to focus on events that are more relevant to real-world clinical decision-making.
 
 # Code
 
