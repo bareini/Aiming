@@ -21,6 +21,7 @@ $h, l, k_{h},k_{l} L$ are parameters controlling the high and low thresholds and
 
 ### Trend Utility Cost:
 For trends, we calculate the difference between the predicted and actual slopes. The trend utility cost $U_{t}$ is designed to penalize sharper deviations, especially in critical cases like a drop in blood pressure. It is computed as:
+
 $U_{tr}(Y_{t-n:t+m}, \hat{Y}_{t-n:t+m}) = \max(\hat{Y}_{t-n:t+m} - Y_{t-n:t+m}, 0)^2 \cdot w_l + \max(Y_{t-n:t+m} - \hat{Y}_{t-n:t+m}, 0)^2 \cdot w_h$
 
 ### Trend Deviation Utility Cost:
@@ -31,6 +32,7 @@ $U_{td}(Y_{t-n:t+m}, \hat{Y}_{t-n:t+m}, y_t, \hat{y}_t) = \left( Y'_{t-n:t} - Y_
 Here, $Y'_{t-n:t}$ represents the expected trend over the previous $n$ steps, and $Y_{t-n:t+m}$ is the actual trend. This utility cost emphasizes how unexpected a trend is based on prior information.
 
 Each of these utility costs provides a different angle on how clinically useful a prediction is, allowing models to focus on events that are more relevant to real-world clinical decision-making.
+
 
 # Code
 
